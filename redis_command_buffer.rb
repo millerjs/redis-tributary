@@ -24,6 +24,10 @@ class RedisCommandBuffer
     @args[1..]
   end
 
+  def to_a
+    @args
+  end
+
   def complete?
     @arg_count == @args.length
   end

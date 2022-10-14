@@ -6,25 +6,47 @@ def parse_args
     }
   }
 
+  required = [
+    :node_id,
+    :node_count,
+    :tributary_hosts,
+    :tributary_ports
+  ]
+
   OptionParser.new do |opts|
     opts.banner = 'Usage: [options]'
 
-    opts.on('-hHOST', '--redis-host=HOST', String, 'redis-host') do |v|
+    opts.on('-hHOST', '--redis-host=HOST') do |v|
       options[:tributary_args][:redis_host] = v
     end
 
-    opts.on('-pPORTS', '--redis-port=PORT', Integer, 'redis-port') do |v|
-      options[:tributary_args][:redis_port] = v
+    opts.on('-pPORTS', '--redis-port=PORT') do |v|
+      options[:tributary_args][:redis_port] = v.to_i
     end
 
-    opts.on('-iID', '--node-id=ID', 'node-id') do |v|
-      options[:node_id] = v
+    opts.on('-iID', '--node-id=ID') do |v|
+      options[:node_id] = v.to_i
     end
 
-    opts.on('-nCOUNT', '--node-count=COUNT', Integer, 'node-count') do |v|
-      options[:node_count] = v
+    opts.on('-nCOUNT', '--node-count=COUNT') do |v|
+      options[:node_count] = v.to_i
+    end
+
+    opts.on('--tributary-hosts=hosts') do |v|
+      options[:tributary_hosts] = v.split(',')
+    end
+
+    opts.on('--tributary-ports=ports') do |v|
+      options[:tributary_ports] = v.split(',')
     end
   end.parse!
+
+  required.each do |key|
+    unless options[key]
+      puts "Missing required argument: #{key}"
+      exit
+    end
+  end
 
   puts 'Options:', options
   options
