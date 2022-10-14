@@ -1,0 +1,41 @@
+version: '3.8'
+services:
+
+  redis1:
+    image: redis:6.2-alpine
+    ports:
+      - '63791:6379'
+    command: redis-server
+    volumes:
+      - redis1:/data
+
+  redis2:
+    image: redis:6.2-alpine
+    ports:
+      - '63792:6379'
+    command: redis-server
+    volumes:
+      - redis2:/data
+
+  tributary1:
+    build: .
+    command: ruby /app/redis_tributary.rb -i 0 -n 3 --redis-host redis1 --redis-port 6379
+    ports:
+      - '16379:36379'
+    depends_on:
+      - redis1
+
+  tributary2:
+    build: .
+    command: ruby /app/redis_tributary.rb -i 1 -n 3 --redis-host redis2 --redis-port 6379
+    ports:
+      - '26379:36379'
+    depends_on:
+      - tributary1
+      - redis2
+
+volumes:
+  redis1:
+    driver: local
+  redis2:
+    driver: local
