@@ -97,7 +97,7 @@ class BroadcastQueue
     id = queue.split(':').last
     deserialized = JSON.parse(value)
     puts "Read from broadcast queue: #{deserialized}"
-    [id, deserialized[:ts], deserialized[:message]]
+    [id, deserialized['ts'], deserialized['message']]
   end
 end
 
