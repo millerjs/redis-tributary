@@ -15,8 +15,8 @@ class Server
         redis_client.connect
         connection = ProxyConnection.new(client)
         connection.proxy_to_downstream(redis_client.upstream)
-        connection.readlines do |downstream, line|
-          redis_client.proxy_to_upstream(downstream, line)
+        connection.readlines do |line|
+          redis_client.proxy_to_upstream(line)
         end
       end
     end
@@ -32,7 +32,7 @@ class ProxyConnection
   def readlines(&block)
     while (line = @client.gets)
       puts "received: #{line}"
-      yield(@client, line)
+      yield(line)
     end
   end
 
@@ -59,7 +59,7 @@ class RawRedisClient
     puts "\nConnected to upstream on port #{@host}:#{@port}"
   end
 
-  def proxy_to_upstream(downstream, line)
+  def proxy_to_upstream(line)
     puts "\nSending to upstream: '#{line}'"
     @upstream.puts(line)
   end
