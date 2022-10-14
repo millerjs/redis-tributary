@@ -1,0 +1,12 @@
+GEM
+  specs:
+    redis (4.3.1)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  redis (~> 4.3.1)
+
+BUNDLED WITH
+   2.1.4
