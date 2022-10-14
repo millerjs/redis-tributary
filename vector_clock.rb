@@ -23,6 +23,8 @@ class TimestampVector < Vector
 end
 
 class VectorClock
+  attr_reader :timestamps
+
   def initialize(node_index, node_count)
     @node_index = node_index
     @node_count = node_count
@@ -44,7 +46,3 @@ class VectorClock
     end
   end
 end
-
-TimestampVector.zero(4) < TimestampVector.zero(4)
-TimestampVector.zero(4) == TimestampVector.zero(4)
-TimestampVector.zero(4) > TimestampVector.zero(4)
