@@ -19,7 +19,7 @@ services:
 
   tributary1:
     build: .
-    command: ruby /app/redis_tributary.rb -i 0 -n 3 --redis-host redis1 --redis-port 6379 --tributary-hosts=tributary2 --tributary-ports=11111
+    command: ruby /app/redis_tributary.rb -i 0 -n 2 --redis-host redis1 --redis-port 6379 --tributary-hosts=tributary1,tributary2 --tributary-ports=11111,11111
     ports:
       - '16379:36379'
     depends_on:
@@ -27,7 +27,7 @@ services:
 
   tributary2:
     build: .
-    command: ruby /app/redis_tributary.rb -i 1 -n 3 --redis-host redis2 --redis-port 6379 --tributary-hosts=tributary1 --tributary-ports=11111
+    command: ruby /app/redis_tributary.rb -i 1 -n 2 --redis-host redis2 --redis-port 6379 --tributary-hosts=tributary1,tributary2 --tributary-ports=11111,11111
     ports:
       - '26379:36379'
     depends_on:
