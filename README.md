@@ -5,8 +5,8 @@ CRDTs to replicate redis via proxy
 
 Note: ship it to prod
 
+<img width="978" alt="Screen Shot 2022-10-15 at 1 07 38 PM" src="https://user-images.githubusercontent.com/4062890/196001785-d0d7e79a-c70a-4a42-8f1a-36179f700233.png">
 
-<img width="511" alt="image" src="https://user-images.githubusercontent.com/4062890/195951087-cad4cd90-1fa2-4f24-b81e-c0dc6b5218d9.png">
 
 
-<img width="969" alt="image" src="https://user-images.githubusercontent.com/4062890/195955567-e44b94fd-4adb-4eaf-b496-332aa6ed9505.png">
+![2022-10-15 13 14 39](https://user-images.githubusercontent.com/4062890/196002047-cf38500d-89ff-45dc-9594-86f6c97f00ca.gif)
